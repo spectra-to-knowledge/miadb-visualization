@@ -15,7 +15,7 @@ def tanimoto_calc(inc1, inc2):
     s = round(DataStructs.TanimotoSimilarity(fp1,fp2),3) #Tanimoto scoring between the two fingerprints
     return s
 
-df = pd.read_excel(r"C:\Users\sarah\Desktop\MIADB-project\document-Mehdi-squelettes-version-propre-MIADB.xlsx") #Replace with your excel metadata file's path
+df = pd.read_excel("metadata_file.xlsx") #Replace with your excel metadata file's path
 
 print(df.columns) #We used 'Skeletons' and 'SMILES' columns for that particular example
 
