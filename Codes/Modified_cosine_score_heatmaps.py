@@ -29,6 +29,18 @@ for sp_i in range(len(spectra)):
         scores_array[sp_i][sp_j] = sc
         scores_array[sp_j][sp_i] = sc
 
+""" If you want to apply a minimum score filter : 
+spectra=spectra[:m]
+n= len(spectra)
+scores_array=np.zeros((m,m),dtype=float)
+for sp_i in range(len(spectra)):
+    for sp_j in range(sp_i,len(spectra)):
+        sc=float(similarity_measure.pair(spectra[sp_i],spectra[sp_j])['score'])
+        if sc <= 0.9:
+            sc = 0
+        scores_array[sp_i][sp_j] = sc
+        scores_array[sp_j][sp_i] = sc """
+
 #Axes definition
 #You're free to input the metadata you want to visualize in your heatmap
 l = [s.metadata['title'] for s in spectra]
