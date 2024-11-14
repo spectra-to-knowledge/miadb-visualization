@@ -13,7 +13,7 @@ plant_names = df.iloc[0].tolist()
 
 # Extract data from the second row onward
 data = df.iloc[1:].reset_index(drop=True)
-data.columns = plant_names  # Assign plant names as column headers
+data.columns = plant_names  # Assign plant names as column headers (Sample code column names were previously replaced by the corresponding plant name) 
 
 # Group duplicate plant names by averaging their intensities
 data = data.groupby(by=data.columns, axis=1).mean()
