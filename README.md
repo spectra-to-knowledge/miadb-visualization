@@ -40,7 +40,11 @@ To get started, you’ll need the following Python libraries:
 You can install the required dependencies with:
 
 ```bash
-pip install -r requirements.txt
+if command -v poetry &> /dev/null; then echo "Poetry is already installed."; poetry --version; else echo "Poetry is not installed. Installing Poetry..."; curl -sSL https://install.python-poetry.org | python3 -; fi
+```
+
+```bash
+poetry install
 ```
 
 ⚠️ WORK IN PROGRESS
@@ -48,7 +52,9 @@ pip install -r requirements.txt
 ## Example Usage
 
 ⚠️ WORK IN PROGRESS
+
 For example scripts on how to calculate MS/MS similarity scores, visualize heatmaps, and compute Tanimoto similarity scores, check the provided example Jupyter Notebooks or Python scripts in the repository.
+
 ⚠️ WORK IN PROGRESS
 
 ## Contributing
