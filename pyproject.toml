@@ -45,14 +45,21 @@ include = [
 
 [tool.poetry.dependencies]
 python = ">=3.12,<3.13"
+gensim = "^4.3.3"
 importlib_resources = "^6.4.5"
-matchms = "^0.28.0"
-myopic-mces = "^1.0.1"
-polars = "^1.13.1"
+matchms = "^0.27.0"
+matplotlib = "3.7.2"
+ms2deepscore = "^2.4.0"
+numpy = "^1.26.4"
+pandas = "^2.2.3"
+polars = "^1.14.0"
 rdkit = "^2024.3.6"
+scipy = "1.13.1"
+seaborn = "^0.13.2"
+spec2vec = "^0.8.0"
 
 [tool.poetry.scripts]
-miaplayground = "miaplayground.cli:main"
+mia-visualization = "mia-visualization.cli:main"
 
 
 [tool.black]
@@ -119,12 +126,12 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [options.entry_points]
-console_scripts = "miaplayground = miaplayground.cli:main"
+console_scripts = "mia-visualization = mia-visualization.cli:main"
 
 [options.packages.find]
 where = "src"
 
 # [options.package_data]
-# miaplayground = "data/.*"
+mia-visualization = "data/.*"
 
 [tool.setuptools_scm]
