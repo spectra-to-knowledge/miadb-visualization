@@ -35,7 +35,7 @@ Features
 💪 Getting Started
 ------------------
 
-⚠️ WORK IN PROGRESS
+We use `poetry <https://python-poetry.org/>`_ to manage dependencies.
 
 .. code-block:: sh
 
@@ -45,6 +45,16 @@ Features
 .. code-block:: sh
 
     poetry install
-    poetry run python3 notebooks/TODO.py
+
+
+Then, you should be able to run the notebooks:
+
+.. code-block:: sh
+    poetry run python3 notebooks/modified_cosine_score_heatmaps.py
+
+In case you need help:
+
+.. code-block:: sh
+    poetry run python3 notebooks/modified_cosine_score_heatmaps.py --help
 
 ⚠️ WORK IN PROGRESS

@@ -1,8 +1,11 @@
-# Libraries and modules import
+#!/usr/bin/env python
+
 from __future__ import annotations
 
 import os
+from typing import List
 
+import click
 import numpy as np
 import pandas as pd
 import seaborn as sns
@@ -11,49 +14,107 @@ from matchms.importing import load_from_mgf
 from matchms.similarity import ModifiedCosine
 from matplotlib import pyplot as plt
 
-# Setting your path
-path_root = "directory_path"  # input the directory path
-file = os.path.join(path_root, "filename")  # input the filename
 
-# Creating a spectra list
-spectra = list(load_from_mgf(file))
+@click.command()
+@click.option(
+    "--path-root",
+    default="src/miadbviz/data",
+    type=click.Path(exists=True, file_okay=False, dir_okay=True),
+    required=True,
+    help="Directory path where the MGF file is located.",
+)
+@click.option(
+    "--filename",
+    default="MIADB-monomers.mgf",
+    type=str,
+    required=True,
+    help="Name of the MGF file to process.",
+)
+@click.option(
+    "--tolerance",
+    type=float,
+    default=0.005,
+    show_default=True,
+    help="Tolerance for the ModifiedCosine similarity measure.",
+)
+@click.option(
+    "--min-score-threshold",
+    type=float,
+    default=0.0,
+    show_default=True,
+    help="Minimum score threshold to filter similarity scores.",
+)
+@click.option(
+    "--max-spectra",
+    type=int,
+    default=321,
+    show_default=True,
+    help="Maximum number of spectra to include in the heatmap.",
+)
+@click.option(
+    "--output-size",
+    type=(int, int),
+    default=(50, 50),
+    show_default=True,
+    help="Figure size for the heatmap (width, height).",
+)
+@click.option(
+    "--cmap",
+    type=str,
+    default="viridis",
+    show_default=True,
+    help="Colormap for the heatmap.",
+)
+def generate_heatmap(
+    path_root: str,
+    filename: str,
+    tolerance: float,
+    min_score_threshold: float,
+    max_spectra: int,
+    output_size: tuple[int, int],
+    cmap: str,
+):
+    """Calculate and visualize a spectral similarity heatmap using Modified Cosine similarity."""
+    # Define file path
+    file_path = os.path.join(path_root, filename)
 
-# Calculating the similarity score
-similarity_measure = ModifiedCosine(
-    tolerance=0.005
-)  # you're free to select another similarity score and to set the tolerance (don't forget to import the module before)
-scores = calculate_scores(spectra, spectra, similarity_measure, is_symmetric=True)
-scores_array = scores.scores.to_array()
+    # Load spectra from the MGF file
+    spectra: List = list(load_from_mgf(file_path))
 
-m = 321  # Modify the value with the number of spectra that you want to plot
+    # Define the similarity measure
+    similarity_measure = ModifiedCosine(tolerance=tolerance)
 
-scores_array = np.zeros((m, m), dtype=float)  # Creating an array of size m by m
-for sp_i in range(len(spectra)):
-    for sp_j in range(sp_i, len(spectra)):
-        sc = float(similarity_measure.pair(spectra[sp_i], spectra[sp_j])["score"])
-        scores_array[sp_i][sp_j] = sc
-        scores_array[sp_j][sp_i] = sc
+    # Calculate similarity scores
+    scores = calculate_scores(spectra, spectra, similarity_measure, is_symmetric=True)
+    scores_array = scores.scores.to_array()
 
-""" If you want to apply a minimum score filter : 
-spectra=spectra[:m]
-n= len(spectra)
-scores_array=np.zeros((m,m),dtype=float)
-for sp_i in range(len(spectra)):
-    for sp_j in range(sp_i,len(spectra)):
-        sc=float(similarity_measure.pair(spectra[sp_i],spectra[sp_j])['score'])
-        if sc <= 0.9:
-            sc = 0
-        scores_array[sp_i][sp_j] = sc
-        scores_array[sp_j][sp_i] = sc """
+    # Limit the number of spectra to max_spectra
+    m = min(max_spectra, len(spectra))
+    spectra = spectra[:m]
+    scores_array = scores_array[:m, :m]
 
-# Axes definition
-# You're free to input the metadata you want to visualize in your heatmap
-l = [s.metadata["title"] for s in spectra]
-sk = [s.metadata["skeleton"] for s in spectra]
-df = pd.DataFrame(scores_array, columns=l, index=sk)
+    # Convert to a regular NumPy array of floats
+    scores_array = scores_array["ModifiedCosine_score"]
+    
+    # Apply minimum score threshold filter
+    filtered_scores_array = np.where(scores_array >= min_score_threshold, scores_array, 0)
 
-# Heatmap plotting
-sns.set(rc={"figure.figsize": (100, 100)})  # You can modulate the output size
-sns.heatmap(df, cmap="viridis")  # You can change the viridis value to set another color palette
-plt.title("MIADB Modified Cosine Heatmap")  # Set your title here
-plt.show()
+    # Extract metadata for heatmap labels
+    titles = [s.metadata.get("title", f"Spectrum {i}") for i, s in enumerate(spectra)]
+    skeletons = [s.metadata.get("skeleton", f"Skeleton {i}") for i, s in enumerate(spectra)]
+
+    # Create DataFrame for the heatmap
+    df = pd.DataFrame(filtered_scores_array, columns=titles, index=skeletons)
+
+    # Plot the heatmap
+    sns.set(rc={"figure.figsize": output_size})
+    sns.heatmap(df, cmap=cmap, linewidths=0.5, linecolor="white")
+    plt.title("MIADB Modified Cosine Heatmap")
+    plt.xticks(rotation=90)
+    plt.yticks(rotation=0)
+    plt.tight_layout()
+    plt.show()
+
+
+if __name__ == "__main__":
+    generate_heatmap()
