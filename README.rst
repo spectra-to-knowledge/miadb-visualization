@@ -50,11 +50,15 @@ We use `poetry <https://python-poetry.org/>`_ to manage dependencies.
 Then, you should be able to run the notebooks:
 
 .. code-block:: sh
-    poetry run python3 notebooks/modified_cosine_score_heatmaps.py
+    poetry run python3 notebooks/generate_heatmap.py
+    poetry run python3 notebooks/generate_heatmap.py --measure-type spec2vec --model-path ../../Downloads/spec2vec_AllPositive_ratio05_filtered_201101_iter_15.model
+    poetry run python3 notebooks/generate_heatmap.py --measure-type ms2deepscore --model-path ../../Downloads/ms2deepscore_model.pt
+
 
 In case you need help:
 
 .. code-block:: sh
-    poetry run python3 notebooks/modified_cosine_score_heatmaps.py --help
+    poetry run python3 notebooks/generate_heatmap.py --help
+
 
 ⚠️ WORK IN PROGRESS
