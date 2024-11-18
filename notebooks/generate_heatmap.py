@@ -6,18 +6,16 @@ import os
 from typing import List
 
 import click
+import gensim
 import numpy as np
 import pandas as pd
 import seaborn as sns
 from matchms import calculate_scores
 from matchms.importing import load_from_mgf
-from matplotlib import pyplot as plt
-
-# Import necessary similarity measures
 from matchms.similarity import ModifiedCosine
+from matplotlib import pyplot as plt
 from ms2deepscore import MS2DeepScore
 from ms2deepscore.models import load_model
-import gensim
 from spec2vec import Spec2Vec
 
 
