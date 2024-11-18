@@ -16,20 +16,20 @@ The tools and methods in this repository are applicable to a wide range of chemi
 Features
 --------
 
-- **MS/MS Similarity Calculation**: 
-  - Use of the **MatchMS** library to calculate various MS/MS similarity scores. 
-  - Reference: [Huber et al., (2020). *matchms - processing and similarity evaluation of mass spectrometry data*. Journal of Open Source Software, 5(52), 2411.](https://doi.org/10.21105/joss.02411)
-  - [MatchMS documentation](https://matchms.readthedocs.io/en/latest/)
+* **MS/MS Similarity Calculation**:
+    * Use of the **matchms** library to calculate various MS/MS similarity scores.
+        * `Reference <https://doi.org/10.21105/joss.02411>`_
+        * `Documentation <https://matchms.readthedocs.io/en/latest/>`_
 
-- **Heatmap Visualization**: 
-  - Visualize MS/MS similarity scores as heatmaps using the **Seaborn** library.
+* **Heatmap Visualization**: 
+    * Visualize MS/MS similarity scores as heatmaps using the **Seaborn** library.
 
-- **Tanimoto Structural Similarity**: 
-  - Compute **Tanimoto similarity scores** between molecular structures.
-  - Visualize the structural similarities as a **tree diagram**.
+* **Tanimoto Structural Similarity**:
+    * Compute **Tanimoto similarity scores** between molecular structures.
+    * Visualize the structural similarities as a **tree diagram**.
 
-- **Ion Distribution Visualization**:
-  - A script to visualize the repartition of ions in complex mass spectrometry datasets.
+* **Ion Distribution Visualization**:
+    * A script to visualize the repartition of ions in complex mass spectrometry datasets.
 
 
 💪 Getting Started
