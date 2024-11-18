@@ -1,11 +1,12 @@
-import seaborn as sns
-import pandas as pd
 import os
-from matplotlib import pyplot as plt
+
+import gensim
+import pandas as pd
+import seaborn as sns
 from matchms import calculate_scores
 from matchms.importing import load_from_mgf
+from matplotlib import pyplot as plt
 from spec2vec import Spec2Vec
-import gensim
 
 # Define paths for the spectra file and the pretrained model (update to your file paths)
 path_root = "path/to/your/data/spectra_file.mgf"
@@ -23,21 +24,23 @@ for s in spectra:
         print(s.metadata)
 
 # Define Spec2Vec similarity measure with intensity weighting and allowed missing data threshold
-spec2vec_similarity = Spec2Vec(model=model, intensity_weighting_power=0.5, allowed_missing_percentage=30.0)
+spec2vec_similarity = Spec2Vec(
+    model=model, intensity_weighting_power=0.5, allowed_missing_percentage=30.0
+)
 
 # Calculate similarity scores between spectra (symmetric scoring)
 scores = calculate_scores(spectra, spectra, spec2vec_similarity, is_symmetric=True)
 scores_array = scores.scores.to_array()
 
 # Extract metadata for heatmap labels
-titles = [s.metadata['title'] for s in spectra]  # Retrieve titles for spectra
-skeletons = [s.metadata['skeleton'] for s in spectra]  # Retrieve skeleton info for spectra
+titles = [s.metadata["title"] for s in spectra]  # Retrieve titles for spectra
+skeletons = [s.metadata["skeleton"] for s in spectra]  # Retrieve skeleton info for spectra
 
 # Create DataFrame for the heatmap visualization
 df = pd.DataFrame(scores_array, columns=skeletons, index=skeletons)
 
 # Generate and display a heatmap
-sns.set(rc={'figure.figsize': (100, 100)})
-sns.heatmap(df, cmap='viridis')
-plt.title('MIADB Spec2Vec Heatmap')  # Set your title here
+sns.set(rc={"figure.figsize": (100, 100)})
+sns.heatmap(df, cmap="viridis")
+plt.title("MIADB Spec2Vec Heatmap")  # Set your title here
 plt.show()
