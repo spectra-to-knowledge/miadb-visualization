@@ -54,16 +54,23 @@ Then, you should be able to run the different notebooks:
     poetry run python3 notebooks/generate_heatmap.py
     # poetry run python3 notebooks/generate_heatmap.py --measure-type spec2vec --model-path ../../Downloads/spec2vec_AllPositive_ratio05_filtered_201101_iter_15.model
     # poetry run python3 notebooks/generate_heatmap.py --measure-type ms2deepscore --model-path ../../Downloads/ms2deepscore_model.pt
-    poetry run python3 notebooks/generate_tanimoto_heatmap_and_dendrogram.py
 
 
 ⚠️ For the Spec2Vec and MS2DeepScore metrics to work, you'll need to download the models first as stated in their respective documentations.
+
+.. code-block:: sh
+
+    poetry run python3 notebooks/generate_tanimoto_heatmap_and_dendrogram.py
+
+
+.. code-block:: sh
+    poetry run python3 notebooks/generate_pie_chart.py
+    poetry run python3 notebooks/generate_pie_chart.py --file-path src/miadbviz/data/ajmalicine-spirooxindoles-corynantheane-spirooxindoles-combined-repartition.xlsx --sheet-name ajmalicine-spiro-corynanthean-s
+    poetry run python3 notebooks/generate_pie_chart.py --file-path src/miadbviz/data/corynanthean-spirooxindoles-best-queries-repartition.xlsx --sheet-name corynanthean-spiro-best-queries
+
 
 In case you need help:
 
 .. code-block:: sh
 
     poetry run python3 notebooks/generate_heatmap.py --help
-
-
-⚠️ WORK IN PROGRESS
