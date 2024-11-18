@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "miadb-visualization"
+name = "miadbviz"
 version = "0.0.1"
 description = "Short Description TODO"
 authors = ["Sarah Szwarc <sarah.szwarc@universite-paris-saclay.fr>"]
@@ -44,7 +44,7 @@ include = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.12,<3.13"
+python = ">=3.10,<3.13"
 gensim = "^4.3.3"
 importlib_resources = "^6.4.5"
 matchms = "^0.27.0"
@@ -131,7 +131,7 @@ console_scripts = "mia-visualization = mia-visualization.cli:main"
 [options.packages.find]
 where = "src"
 
-# [options.package_data]
-mia-visualization = "data/.*"
+[options.package_data]
+miadbviz = "data/.*"
 
 [tool.setuptools_scm]
