@@ -56,6 +56,8 @@ Then, you should be able to run the notebooks:
     poetry run python3 notebooks/generate_heatmap.py --measure-type ms2deepscore --model-path ../../Downloads/ms2deepscore_model.pt
 
 
+⚠️ For the Spec2Vec and MS2DeepScore metrics to work, you'll need to download the models first as stated in their respective documentations.
+
 In case you need help:
 
 .. code-block:: sh
