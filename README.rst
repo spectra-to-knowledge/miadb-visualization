@@ -47,13 +47,14 @@ We use `poetry <https://python-poetry.org/>`_ to manage dependencies.
     poetry install
 
 
-Then, you should be able to run the notebooks:
+Then, you should be able to run the different notebooks:
 
 .. code-block:: sh
 
     poetry run python3 notebooks/generate_heatmap.py
-    poetry run python3 notebooks/generate_heatmap.py --measure-type spec2vec --model-path ../../Downloads/spec2vec_AllPositive_ratio05_filtered_201101_iter_15.model
-    poetry run python3 notebooks/generate_heatmap.py --measure-type ms2deepscore --model-path ../../Downloads/ms2deepscore_model.pt
+    # poetry run python3 notebooks/generate_heatmap.py --measure-type spec2vec --model-path ../../Downloads/spec2vec_AllPositive_ratio05_filtered_201101_iter_15.model
+    # poetry run python3 notebooks/generate_heatmap.py --measure-type ms2deepscore --model-path ../../Downloads/ms2deepscore_model.pt
+    poetry run python3 notebooks/generate_tanimoto_heatmap_and_dendrogram.py
 
 
 ⚠️ For the Spec2Vec and MS2DeepScore metrics to work, you'll need to download the models first as stated in their respective documentations.
