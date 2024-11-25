@@ -35,43 +35,43 @@ Features
 💪 Getting Started
 ------------------
 
-We use `poetry <https://python-poetry.org/>`_ to manage dependencies.
+We use `uv <https://docs.astral.sh/uv/>`_ to manage dependencies.
 
 .. code-block:: sh
 
-    if command -v poetry &> /dev/null; then echo "Poetry is already installed."; poetry --version; else echo "Poetry is not installed. Installing Poetry..."; curl -sSL https://install.python-poetry.org | python3 -; fi
+    pip install uv
 
 
 .. code-block:: sh
 
-    poetry install
+    uv sync
 
 
 Then, you should be able to run the different notebooks:
 
 .. code-block:: sh
 
-    poetry run python3 notebooks/generate_heatmap.py
-    # poetry run python3 notebooks/generate_heatmap.py --measure-type spec2vec --model-path ../../Downloads/spec2vec_AllPositive_ratio05_filtered_201101_iter_15.model
-    # poetry run python3 notebooks/generate_heatmap.py --measure-type ms2deepscore --model-path ../../Downloads/ms2deepscore_model.pt
+    uv run python3 notebooks/generate_heatmap.py
+    # uv run python3 notebooks/generate_heatmap.py --measure-type spec2vec --model-path ../../Downloads/spec2vec_AllPositive_ratio05_filtered_201101_iter_15.model
+    # uv run python3 notebooks/generate_heatmap.py --measure-type ms2deepscore --model-path ../../Downloads/ms2deepscore_model.pt
 
 
 ⚠️ For the Spec2Vec and MS2DeepScore metrics to work, you'll need to download the models first as stated in their respective documentations.
 
 .. code-block:: sh
 
-    poetry run python3 notebooks/generate_tanimoto_heatmap_and_dendrogram.py
+    uv run python3 notebooks/generate_tanimoto_heatmap_and_dendrogram.py
 
 
 .. code-block:: sh
 
-    poetry run python3 notebooks/generate_pie_chart.py
-    poetry run python3 notebooks/generate_pie_chart.py --file-path src/miadbviz/data/ajmalicine-spirooxindoles-corynantheane-spirooxindoles-combined-repartition.xlsx --sheet-name ajmalicine-spiro-corynanthean-s
-    poetry run python3 notebooks/generate_pie_chart.py --file-path src/miadbviz/data/corynanthean-spirooxindoles-best-queries-repartition.xlsx --sheet-name corynanthean-spiro-best-queries
+    uv run python3 notebooks/generate_pie_chart.py
+    uv run python3 notebooks/generate_pie_chart.py --file-path src/miadbviz/data/ajmalicine-spirooxindoles-corynantheane-spirooxindoles-combined-repartition.xlsx --sheet-name ajmalicine-spiro-corynanthean-s
+    uv run python3 notebooks/generate_pie_chart.py --file-path src/miadbviz/data/corynanthean-spirooxindoles-best-queries-repartition.xlsx --sheet-name corynanthean-spiro-best-queries
 
 
 In case you need help:
 
 .. code-block:: sh
 
-    poetry run python3 notebooks/generate_heatmap.py --help
+    uv run python3 notebooks/generate_heatmap.py --help
