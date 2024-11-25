@@ -76,11 +76,6 @@ line_length = 100
 include_trailing_comma = true
 reverse_relative = true
 
-[tool.pytest.ini_options]
-markers = [
-    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
-]
-
 [tool.doc8]
 max-line-length = 120
 
@@ -88,8 +83,13 @@ max-line-length = 120
 # check  .flake8
 
 [tool.pdm.build]
-includes = ["docs/source/*.py", "docs/source/*.rst", "docs/source/*.png", "AUTHORS.rst", "CHANGELOG.rst", "LICENSE", "README.rst"]
+includes = ["docs/source/*.py", "docs/source/*.rst", "docs/source/*.png", "src/", "AUTHORS.rst", "CHANGELOG.rst", "LICENSE", "README.rst"]
 excludes = [".bumpversion.cfg", ".coveragerc", ".flake8", ".readthedocs.yml", "CITATION.cff", "docker-compose.yml", "Dockerfile", "uv.lock", "tox.ini"]
+
+[tool.pytest.ini_options]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+]
 
 [tool.ruff]
 unfixable = [
