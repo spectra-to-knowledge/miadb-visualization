@@ -1,15 +1,21 @@
-[tool.poetry]
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[project]
 name = "miadbviz"
 version = "0.0.1"
 description = "Short Description TODO"
-authors = ["Sarah Szwarc <sarah.szwarc@universite-paris-saclay.fr>"]
-license = "LICENSE"
-readme = "README.rst"
-homepage = "https://github.com/spectra-to-knowledge/miadb-visualization"
-repository = "https://github.com/spectra-to-knowledge/miadb-visualization"
-documentation = "https://github.com/spectra-to-knowledge/miadb-visualization"
-keywords = ["knowledgeExtraction", "spectralInformation", "queryingSystem"]
-classifiers =[
+authors = [
+    {name = "Sarah Szwarc", email = "sarah.szwarc@universite-paris-saclay.fr"},
+]
+requires-python = "<3.13,>=3.10"
+keywords = [
+    "knowledgeExtraction",
+    "spectralInformation",
+    "queryingSystem",
+]
+classifiers = [
     "Development Status :: 1 - Planning",
     "Environment :: Console",
     "Intended Audience :: Developers",
@@ -20,54 +26,48 @@ classifiers =[
     "Framework :: Sphinx",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python :: 3 :: Only"
+    "Programming Language :: Python :: 3 :: Only",
 ]
-exclude = [
-    ".bumpversion.cfg",
-    ".coveragerc",
-    ".flake8",
-    ".readthedocs.yml",
-    "CITATION.cff",
-    "docker-compose.yml",
-    "Dockerfile",
-    "poetry.lock",
-    "tox.ini"
-]
-include = [
-    "docs/source/*.py",
-    "docs/source/*.rst",
-    "docs/source/*.png",
-    "AUTHORS.rst",
-    "CHANGELOG.rst",
-    "LICENSE",
-    "README.rst"
+license = {text = "LICENSE"}
+readme = "README.rst"
+
+dependencies = [
+    "click<9.0.0,>=8.1.7",
+    "gensim<5.0.0,>=4.3.3",
+    "importlib-resources<7.0.0,>=6.4.5",
+    "matchms<1.0.0,>=0.27.0",
+    "matplotlib==3.7.2",
+    "ms2deepscore<3.0.0,>=2.4.0",
+    "numpy<2.0.0,>=1.26.4",
+    "openpyxl<4.0.0,>=3.1.5",
+    "pandas<3.0.0,>=2.2.3",
+    "polars<2.0.0,>=1.14.0",
+    "rdkit<2025.0.0,>=2024.3.6",
+    "scipy==1.13.1",
+    "seaborn<1.0.0,>=0.13.2",
+    "spec2vec<1.0.0,>=0.8.0",
 ]
 
-[tool.poetry.dependencies]
-python = ">=3.10,<3.13"
-click = "^8.1.7"
-gensim = "^4.3.3"
-importlib_resources = "^6.4.5"
-matchms = "^0.27.0"
-matplotlib = "3.7.2"
-ms2deepscore = "^2.4.0"
-numpy = "^1.26.4"
-openpyxl = "^3.1.5"
-pandas = "^2.2.3"
-polars = "^1.14.0"
-rdkit = "^2024.3.6"
-scipy = "1.13.1"
-seaborn = "^0.13.2"
-spec2vec = "^0.8.0"
+[options.entry_points]
+console_scripts = "mia-visualization = mia-visualization.cli:main"
 
-[tool.poetry.scripts]
+[options.packages.find]
+where = "src"
+
+[options.package_data]
+miadbviz = "data/.*"
+
+[project.urls]
+homepage = "https://github.com/spectra-to-knowledge/miadb-visualization"
+repository = "https://github.com/spectra-to-knowledge/miadb-visualization"
+documentation = "https://github.com/spectra-to-knowledge/miadb-visualization"
+
+[project.scripts]
 mia-visualization = "mia-visualization.cli:main"
-
 
 [tool.black]
 line-length = 100
 target-version = ["py312"]
-
 
 [tool.isort]
 profile = "black"
@@ -76,20 +76,20 @@ line_length = 100
 include_trailing_comma = true
 reverse_relative = true
 
-
 [tool.pytest.ini_options]
 markers = [
     "slow: marks tests as slow (deselect with '-m \"not slow\"')",
 ]
 
-
 [tool.doc8]
 max-line-length = 120
-
 
 [tool.flake8]
 # check  .flake8
 
+[tool.pdm.build]
+includes = ["docs/source/*.py", "docs/source/*.rst", "docs/source/*.png", "AUTHORS.rst", "CHANGELOG.rst", "LICENSE", "README.rst"]
+excludes = [".bumpversion.cfg", ".coveragerc", ".flake8", ".readthedocs.yml", "CITATION.cff", "docker-compose.yml", "Dockerfile", "uv.lock", "tox.ini"]
 
 [tool.ruff]
 unfixable = [
@@ -121,19 +121,3 @@ lines-between-types = 1
 lines-after-imports = 2
 known-first-party = ["poetry_plugin_export"]
 required-imports = ["from __future__ import annotations"]
-
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
-
-[options.entry_points]
-console_scripts = "mia-visualization = mia-visualization.cli:main"
-
-[options.packages.find]
-where = "src"
-
-[options.package_data]
-miadbviz = "data/.*"
-
-[tool.setuptools_scm]
