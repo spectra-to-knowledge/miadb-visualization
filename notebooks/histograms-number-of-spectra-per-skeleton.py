@@ -35,20 +35,22 @@ plt.ylim(0, max(skeleton_values) * 1.2)
 
 # Annotate the bars with their respective counts, oriented vertically
 for bar, value in zip(bars, skeleton_values):
-    plt.text(bar.get_x() + bar.get_width() / 2,  # Horizontal position
-             bar.get_height() + 0.5,  # Vertical position slightly above the bar
-             str(value),              # Text to display
-             ha='center',             # Horizontal alignment
-             va='bottom',             # Vertical alignment
-             rotation=90,             # Rotate text vertically
-             fontsize=10)             # Font size for the annotation
+    plt.text(
+        bar.get_x() + bar.get_width() / 2,  # Horizontal position
+        bar.get_height() + 0.5,  # Vertical position slightly above the bar
+        str(value),  # Text to display
+        ha="center",  # Horizontal alignment
+        va="bottom",  # Vertical alignment
+        rotation=90,  # Rotate text vertically
+        fontsize=10,  # Font size for the annotation
+    )
 
 # Configure axis labels and tick rotation for clarity
-plt.xticks(rotation=90, ha='center')  # Rotate x-axis labels vertically
-plt.xlabel("Skeleton")                # Label for the x-axis
-plt.ylabel("Number of spectra")       # Label for the y-axis
+plt.xticks(rotation=90, ha="center")  # Rotate x-axis labels vertically
+plt.xlabel("Skeleton")  # Label for the x-axis
+plt.ylabel("Number of spectra")  # Label for the y-axis
 plt.title("Number of spectra per skeleton")  # Title of the plot
-plt.tight_layout()                    # Adjust layout for better appearance
+plt.tight_layout()  # Adjust layout for better appearance
 
 # Display the histogram
 plt.show()

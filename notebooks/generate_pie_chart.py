@@ -4,6 +4,7 @@ import click
 import matplotlib.pyplot as plt
 import pandas as pd
 
+
 @click.command()
 @click.option(
     "--file-path",
@@ -27,7 +28,7 @@ import pandas as pd
 )
 def generate_pie_chart(file_path: str, sheet_name: str, output_figure: str):
     """Generate a pie chart of ion distribution by plant genus based on intensity."""
-    
+
     # Read the data from the Excel file
     df = pd.read_excel(file_path, sheet_name=sheet_name, header=None)
 
@@ -57,7 +58,9 @@ def generate_pie_chart(file_path: str, sheet_name: str, output_figure: str):
     data_transposed.columns = ["Plant"] + list(data_transposed.columns[1:])
 
     # Convert the data to long format for each plant
-    data_long = pd.melt(data_transposed, id_vars=["Plant"], var_name="Ion", value_name="Intensity")
+    data_long = pd.melt(
+        data_transposed, id_vars=["Plant"], var_name="Ion", value_name="Intensity"
+    )
 
     # Extract genus from plant names
     data_long["Genus"] = data_long["Plant"].apply(
@@ -79,7 +82,9 @@ def generate_pie_chart(file_path: str, sheet_name: str, output_figure: str):
 
     # Combine genera with less than 1% of total intensity into an "Other" category
     total_intensity_sum = grouped_data["total_intensity"].sum()
-    grouped_data["Percentage"] = (grouped_data["total_intensity"] / total_intensity_sum) * 100
+    grouped_data["Percentage"] = (
+        grouped_data["total_intensity"] / total_intensity_sum
+    ) * 100
     small_genres = grouped_data[grouped_data["Percentage"] < 1]
 
     # Create an "Other" category if necessary
@@ -132,6 +137,7 @@ def generate_pie_chart(file_path: str, sheet_name: str, output_figure: str):
         print(f"Pie chart saved to {output_figure}")
     else:
         plt.show()
+
 
 if __name__ == "__main__":
     generate_pie_chart()

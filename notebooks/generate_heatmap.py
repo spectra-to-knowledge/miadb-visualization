@@ -32,7 +32,9 @@ def get_similarity_measure(measure_type: str, model_path: str = None) -> object:
         if not model_path:
             raise ValueError("Model path is required for Spec2Vec")
         model = gensim.models.Word2Vec.load(model_path)
-        return Spec2Vec(model=model, intensity_weighting_power=0.5, allowed_missing_percentage=30.0)
+        return Spec2Vec(
+            model=model, intensity_weighting_power=0.5, allowed_missing_percentage=30.0
+        )
     else:
         raise ValueError("Unsupported similarity measure")
 
@@ -135,11 +137,15 @@ def generate_heatmap(
         scores_array = scores_array["ModifiedCosine_score"]
 
     # Apply minimum score threshold filter
-    filtered_scores_array = np.where(scores_array >= min_score_threshold, scores_array, 0)
+    filtered_scores_array = np.where(
+        scores_array >= min_score_threshold, scores_array, 0
+    )
 
     # Extract metadata for heatmap labels
     titles = [s.metadata.get("title", f"Spectrum {i}") for i, s in enumerate(spectra)]
-    skeletons = [s.metadata.get("skeleton", f"Skeleton {i}") for i, s in enumerate(spectra)]
+    skeletons = [
+        s.metadata.get("skeleton", f"Skeleton {i}") for i, s in enumerate(spectra)
+    ]
 
     # Create DataFrame for the heatmap visualization
     df = pd.DataFrame(filtered_scores_array, columns=titles, index=skeletons)
