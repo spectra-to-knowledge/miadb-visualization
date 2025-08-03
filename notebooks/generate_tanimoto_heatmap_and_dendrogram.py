@@ -86,7 +86,8 @@ def generate_tanimoto_heatmap_and_dendrogram(
     scores = np.zeros((len(sm), len(sm)))
     for i in range(len(sm)):
         for j in range(len(sm)):
-            score = tanimoto_calc(sm[i], sm[j])  # Calculate Tanimoto similarity
+            # Calculate Tanimoto similarity
+            score = tanimoto_calc(sm[i], sm[j])
             scores[i][j] = score
             scores[j][i] = score  # Symmetric matrix
 
