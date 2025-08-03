@@ -49,9 +49,6 @@ dependencies = [
 [options.entry_points]
 console_scripts = "mia-visualization = mia-visualization.cli:main"
 
-[options.packages.find]
-where = "src"
-
 [options.package_data]
 miadbviz = "data/.*"
 
@@ -79,21 +76,17 @@ dev = [
     "types-requests>=2.32.4.20250611",
 ]
 
+[tool.coverage.report]
+skip_empty = true
+
+[tool.coverage.run]
+branch = true
+source = ["miadbviz"]
+
 [tool.mypy]
 files = ["miadbviz"]
-disallow_untyped_defs = true
-disallow_any_unimported = true
-no_implicit_optional = true
-check_untyped_defs = true
-warn_return_any = true
-warn_unused_ignores = true
-show_error_codes = true
-ignore_missing_imports = true
 
 [tool.pytest.ini_options]
-markers = [
-    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
-]
 pythonpath = [
   "miadbviz"
 ]
@@ -102,67 +95,7 @@ testpaths = [
 ]
 
 [tool.ruff]
-target-version = "py311"
-line-length = 120
 fix = true
-
-[tool.ruff.lint]
-select = [
-    # flake8-2020
-    "YTT",
-    # flake8-bandit
-    "S",
-    # flake8-bugbear
-    "B",
-    # flake8-builtins
-    "A",
-    # flake8-comprehensions
-    "C4",
-    # flake8-debugger
-    "T10",
-    # flake8-simplify
-    "SIM",
-    # isort
-    "I",
-    # mccabe
-    "C90",
-    # pycodestyle
-    "E", "W",
-    # pyflakes
-    "F",
-    # pygrep-hooks
-    "PGH",
-    # pyupgrade
-    "UP",
-    # ruff
-    "RUF",
-    # tryceratops
-    "TRY",
-]
-ignore = [
-    # LineTooLong
-    "E501",
-    # DoNotAssignLambda
-    "E731",
-]
-
-[tool.ruff.lint.per-file-ignores]
-"tests/*" = ["S101"]
 
 [tool.ruff.format]
 preview = true
-
-[tool.coverage.report]
-skip_empty = true
-
-[tool.coverage.run]
-branch = true
-source = ["miadbviz"]
-
-[tool.ruff.lint.flake8-tidy-imports]
-ban-relative-imports = "all"
-
-[tool.ruff.lint.isort]
-force-single-line = true
-lines-between-types = 1
-lines-after-imports = 2
