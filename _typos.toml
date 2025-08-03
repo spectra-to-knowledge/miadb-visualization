@@ -1,0 +1,7 @@
+[files]
+extend-exclude = [
+    "cache/",
+    "data/",
+    "scratch/",
+    "miadbviz/data/"
+]
