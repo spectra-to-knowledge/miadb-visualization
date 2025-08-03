@@ -3,13 +3,13 @@
 from __future__ import annotations
 
 import os
-from typing import List
 
 import click
 import gensim
 import numpy as np
 import pandas as pd
 import seaborn as sns
+
 from matchms import calculate_scores
 from matchms.importing import load_from_mgf
 from matchms.similarity import ModifiedCosine
@@ -32,9 +32,7 @@ def get_similarity_measure(measure_type: str, model_path: str = None) -> object:
         if not model_path:
             raise ValueError("Model path is required for Spec2Vec")
         model = gensim.models.Word2Vec.load(model_path)
-        return Spec2Vec(
-            model=model, intensity_weighting_power=0.5, allowed_missing_percentage=30.0
-        )
+        return Spec2Vec(model=model, intensity_weighting_power=0.5, allowed_missing_percentage=30.0)
     else:
         raise ValueError("Unsupported similarity measure")
 
@@ -42,7 +40,7 @@ def get_similarity_measure(measure_type: str, model_path: str = None) -> object:
 @click.command()
 @click.option(
     "--path-root",
-    default="src/miadbviz/data",
+    default="miadbviz/data",
     type=click.Path(exists=True, file_okay=False, dir_okay=True),
     required=True,
     help="Directory path where the MGF file is located.",
@@ -118,7 +116,7 @@ def generate_heatmap(
     file_path = os.path.join(path_root, filename)
 
     # Load spectra from the MGF file
-    spectra: List = list(load_from_mgf(file_path))
+    spectra: list = list(load_from_mgf(file_path))
 
     # Get the appropriate similarity measure
     similarity_measure = get_similarity_measure(measure_type, model_path)
@@ -137,15 +135,11 @@ def generate_heatmap(
         scores_array = scores_array["ModifiedCosine_score"]
 
     # Apply minimum score threshold filter
-    filtered_scores_array = np.where(
-        scores_array >= min_score_threshold, scores_array, 0
-    )
+    filtered_scores_array = np.where(scores_array >= min_score_threshold, scores_array, 0)
 
     # Extract metadata for heatmap labels
     titles = [s.metadata.get("title", f"Spectrum {i}") for i, s in enumerate(spectra)]
-    skeletons = [
-        s.metadata.get("skeleton", f"Skeleton {i}") for i, s in enumerate(spectra)
-    ]
+    skeletons = [s.metadata.get("skeleton", f"Skeleton {i}") for i, s in enumerate(spectra)]
 
     # Create DataFrame for the heatmap visualization
     df = pd.DataFrame(filtered_scores_array, columns=titles, index=skeletons)

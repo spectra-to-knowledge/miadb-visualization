@@ -32,18 +32,16 @@ license = {text = "LICENSE"}
 readme = "README.rst"
 
 dependencies = [
-    "click<9.0.0,>=8.1.7",
-    "gensim<5.0.0,>=4.3.3",
-    "importlib-resources<7.0.0,>=6.5.2",
-    "matchms<1.0.0,>=0.27.0",
+    "click<9.0.0,>=8.2.1",
+    "gensim<5.0.0,>=4.3.2",
+    "matchms<1.0.0,>=0.27.0", # blocked because of gensim
     "matplotlib<4.0.0,>=3.7.2",
-    "ms2deepscore<3.0.0,>=2.5.0",
+    "ms2deepscore<3.0.0,>=2.5.0", # blocked because of gensim
     "numpy<2.0.0,>=1.26.4",
     "openpyxl<4.0.0,>=3.1.5",
     "pandas<3.0.0,>=2.2.3",
-    "polars<2.0.0,>=1.21.0",
     "rdkit<2025.0.0,>=2024.9.4", # blocked because of matchms
-    "scipy<2.0.0,>=1.13.1",
+    "scipy==1.11.0", # blocked because of gensim
     "seaborn<1.0.0,>=0.13.2",
     "spec2vec<1.0.0,>=0.8.0",
 ]
@@ -65,67 +63,101 @@ documentation = "https://github.com/spectra-to-knowledge/miadb-visualization"
 [project.scripts]
 mia-visualization = "mia-visualization.cli:main"
 
-[tool.black]
-line-length = 100
-target-version = ["py312"]
 
-[tool.isort]
-profile = "black"
-multi_line_output = 3
-line_length = 100
-include_trailing_comma = true
-reverse_relative = true
+[dependency-groups]
+dev = [
+    "deptry>=0.23.0",
+    "mkdocs>=1.4.2",
+    "mkdocs-material>=9.6.15",
+    "mkdocstrings[python]>=0.30.0",
+    "mypy>=1.17.0",
+    "pre-commit>=2.20.0",
+    "pytest>=8.4.1",
+    "pytest-cov>=6.2.1",
+    "ruff>=0.12.4",
+    "tox-uv>=1.26.2",
+    "types-requests>=2.32.4.20250611",
+]
 
-[tool.doc8]
-max-line-length = 120
-
-[tool.flake8]
-# check  .flake8
-
-[tool.pdm.build]
-includes = ["docs/source/*.py", "docs/source/*.rst", "docs/source/*.png", "src/", "AUTHORS.rst", "CHANGELOG.rst", "LICENSE", "README.rst"]
-excludes = [".bumpversion.cfg", ".coveragerc", ".flake8", ".readthedocs.yml", "CITATION.cff", "docker-compose.yml", "Dockerfile", "uv.lock", "tox.ini"]
+[tool.mypy]
+files = ["miadbviz"]
+disallow_untyped_defs = true
+disallow_any_unimported = true
+no_implicit_optional = true
+check_untyped_defs = true
+warn_return_any = true
+warn_unused_ignores = true
+show_error_codes = true
+ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 markers = [
     "slow: marks tests as slow (deselect with '-m \"not slow\"')",
 ]
+pythonpath = [
+  "miadbviz"
+]
+testpaths = [
+    "tests"
+]
 
 [tool.ruff]
-target-version = "py312"
-line-length = 88
+target-version = "py311"
+line-length = 120
+fix = true
 
 [tool.ruff.lint]
-extend-select = [
+select = [
+    # flake8-2020
+    "YTT",
+    # flake8-bandit
+    "S",
     # flake8-bugbear
     "B",
+    # flake8-builtins
+    "A",
     # flake8-comprehensions
     "C4",
-    # flake8-eradicate/eradicate
-    "ERA",
-    # isort
-    "I",
-    # pep8-naming
-    "N",
-    # flake8-pie
-    "PIE",
-    # pygrep
-    "PGH",
-    # ruff checks
-    "RUF",
+    # flake8-debugger
+    "T10",
     # flake8-simplify
     "SIM",
-    # flake8-type-checking
-    "TCH",
-    # flake8-tidy-imports
-    "TID",
+    # isort
+    "I",
+    # mccabe
+    "C90",
+    # pycodestyle
+    "E", "W",
+    # pyflakes
+    "F",
+    # pygrep-hooks
+    "PGH",
     # pyupgrade
     "UP",
+    # ruff
+    "RUF",
+    # tryceratops
+    "TRY",
 ]
-unfixable = [
-    # do not autoremove commented out code
-    "ERA",
+ignore = [
+    # LineTooLong
+    "E501",
+    # DoNotAssignLambda
+    "E731",
 ]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"]
+
+[tool.ruff.format]
+preview = true
+
+[tool.coverage.report]
+skip_empty = true
+
+[tool.coverage.run]
+branch = true
+source = ["miadbviz"]
 
 [tool.ruff.lint.flake8-tidy-imports]
 ban-relative-imports = "all"
@@ -134,4 +166,3 @@ ban-relative-imports = "all"
 force-single-line = true
 lines-between-types = 1
 lines-after-imports = 2
-required-imports = ["from __future__ import annotations"]

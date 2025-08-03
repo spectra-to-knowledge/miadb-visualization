@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import pandas as pd
+
 from rdkit import Chem
 
 
@@ -25,9 +26,7 @@ def convert_smiles_to_smarts(input_file, output_file, sheet_name="Sheet1"):
     for smiles in smiles_list:
         print(smiles)
         mol = Chem.MolFromSmiles(smiles)
-        smarts = (
-            Chem.MolToSmarts(mol, isomericSmiles=True) if mol else None
-        )  # Check if mol is valid
+        smarts = Chem.MolToSmarts(mol, isomericSmiles=True) if mol else None  # Check if mol is valid
         smarts_list.append(smarts)
 
     # Add the SMARTS column to the existing DataFrame

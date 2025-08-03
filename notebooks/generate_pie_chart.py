@@ -8,7 +8,7 @@ import pandas as pd
 @click.command()
 @click.option(
     "--file-path",
-    default="src/miadbviz/data/ajmalicine-spirooxindoles-best-queries-repartition.xlsx",
+    default="miadbviz/data/ajmalicine-spirooxindoles-best-queries-repartition.xlsx",
     type=click.Path(exists=True, dir_okay=False, readable=True),
     required=True,
     help="Path to the Excel file containing ion intensity data.",
@@ -49,23 +49,17 @@ def generate_pie_chart(file_path: str, sheet_name: str, output_figure: str):
 
     # Transpose the data so plants become rows
     data_transposed = data.T
-    data_transposed.columns = [
-        f"Ion_{i + 1}" for i in range(len(data_transposed.columns))
-    ]  # Rename columns
+    data_transposed.columns = [f"Ion_{i + 1}" for i in range(len(data_transposed.columns))]  # Rename columns
 
     # Reset index so plant names become a column
     data_transposed = data_transposed.reset_index()
     data_transposed.columns = ["Plant"] + list(data_transposed.columns[1:])
 
     # Convert the data to long format for each plant
-    data_long = pd.melt(
-        data_transposed, id_vars=["Plant"], var_name="Ion", value_name="Intensity"
-    )
+    data_long = pd.melt(data_transposed, id_vars=["Plant"], var_name="Ion", value_name="Intensity")
 
     # Extract genus from plant names
-    data_long["Genus"] = data_long["Plant"].apply(
-        lambda x: x.split()[0] if isinstance(x, str) else "Unknown"
-    )
+    data_long["Genus"] = data_long["Plant"].apply(lambda x: x.split()[0] if isinstance(x, str) else "Unknown")
 
     # Remove rows with zero intensity
     data_long = data_long[data_long["Intensity"] > 0]
@@ -82,9 +76,7 @@ def generate_pie_chart(file_path: str, sheet_name: str, output_figure: str):
 
     # Combine genera with less than 1% of total intensity into an "Other" category
     total_intensity_sum = grouped_data["total_intensity"].sum()
-    grouped_data["Percentage"] = (
-        grouped_data["total_intensity"] / total_intensity_sum
-    ) * 100
+    grouped_data["Percentage"] = (grouped_data["total_intensity"] / total_intensity_sum) * 100
     small_genres = grouped_data[grouped_data["Percentage"] < 1]
 
     # Create an "Other" category if necessary
@@ -94,14 +86,12 @@ def generate_pie_chart(file_path: str, sheet_name: str, output_figure: str):
         other_genres = ", ".join(small_genres["Genus"])
 
         grouped_data = grouped_data[grouped_data["Percentage"] >= 1]
-        other_data = pd.DataFrame(
-            {
-                "Genus": ["Other"],
-                "total_intensity": [other_intensity],
-                "total_count": [other_count],
-                "Percentage": [small_genres["Percentage"].sum()],
-            }
-        )
+        other_data = pd.DataFrame({
+            "Genus": ["Other"],
+            "total_intensity": [other_intensity],
+            "total_count": [other_count],
+            "Percentage": [small_genres["Percentage"].sum()],
+        })
         grouped_data = pd.concat([grouped_data, other_data], ignore_index=True)
 
     # Create a pie chart based on the total intensity for each genus

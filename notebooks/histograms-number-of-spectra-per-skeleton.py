@@ -1,11 +1,14 @@
-import matplotlib.pyplot as plt
-from matchms.importing import load_from_mgf
 from collections import Counter
+
+import matplotlib.pyplot as plt
 import numpy as np
+
+from matchms.importing import load_from_mgf
+
 
 # Define the path to the MGF file containing annotated spectra
 # Replace "path_to_file.mgf" with the actual file path
-mgf_path = "path_to_file.mgf"
+mgf_path = "miadbviz/data/MIADB-monomers.mgf"
 
 # Load spectra from the MGF file
 spectra = load_from_mgf(mgf_path)
@@ -34,7 +37,7 @@ bars = plt.bar(skeleton_names, skeleton_values, color=colors, width=0.7)
 plt.ylim(0, max(skeleton_values) * 1.2)
 
 # Annotate the bars with their respective counts, oriented vertically
-for bar, value in zip(bars, skeleton_values):
+for bar, value in zip(bars, skeleton_values, strict=False):
     plt.text(
         bar.get_x() + bar.get_width() / 2,  # Horizontal position
         bar.get_height() + 0.5,  # Vertical position slightly above the bar

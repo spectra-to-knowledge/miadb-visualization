@@ -5,10 +5,13 @@ from __future__ import annotations
 import click
 import numpy as np
 import pandas as pd
+
 from matplotlib import pyplot as plt
 from rdkit import DataStructs
-from rdkit.Chem import AllChem, MolFromSmiles
-from scipy.cluster.hierarchy import dendrogram, linkage
+from rdkit.Chem import AllChem
+from rdkit.Chem import MolFromSmiles
+from scipy.cluster.hierarchy import dendrogram
+from scipy.cluster.hierarchy import linkage
 
 
 def tanimoto_calc(inc1: str, inc2: str) -> float:
@@ -24,7 +27,7 @@ def tanimoto_calc(inc1: str, inc2: str) -> float:
 @click.command()
 @click.option(
     "--metadata-file",
-    default="src/miadbviz/data/skeletons-smiles.xlsx",
+    default="miadbviz/data/skeletons-smiles.xlsx",
     type=click.Path(exists=True, dir_okay=False, readable=True),
     required=True,
     help="Path to the metadata Excel file containing SMILES and Skeletons columns.",
