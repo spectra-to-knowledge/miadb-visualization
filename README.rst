@@ -5,7 +5,7 @@ MIADB-visualization
     This repository provides tools and scripts designed for chemists and researchers who are new to Python scripting, specifically in the context of mass spectrometry (MS/MS) and molecular structure analysis.
 
 The repository leverages `matchms <https://matchms.readthedocs.io/en/latest/>`_ to calculate various MS/MS similarity scores, allowing for a more effective comparison of mass spectrometry data.
-It also includes functionalities for visualizing these similarity scores using `seaborn <https://github.com/mwaskom/seaborn>`_ heatmaps. 
+It also includes functionalities for visualizing these similarity scores using `seaborn <https://github.com/mwaskom/seaborn>`_ heatmaps.
 
 Additionally, the repository contains a script for calculating **Tanimoto coefficients** between multiple molecular structures and visualizing structural similarities as a tree.
 Another script is included to visualize the ion distribution within complex datasets, enhancing the understanding of mass spectrometry results.
@@ -21,7 +21,7 @@ Features
         * `Reference <https://doi.org/10.21105/joss.02411>`_
         * `Documentation <https://matchms.readthedocs.io/en/latest/>`_
 
-* **Heatmap Visualization**: 
+* **Heatmap Visualization**:
     * Visualize MS/MS similarity scores as heatmaps using the **Seaborn** library.
 
 * **Tanimoto Structural Similarity**:

@@ -7,12 +7,15 @@ from __future__ import annotations
 
 import logging
 import os
-from subprocess import CalledProcessError, check_output
+
+from subprocess import CalledProcessError
+from subprocess import check_output
+
 
 __all__ = [
     "VERSION",
-    "get_version",
     "get_git_hash",
+    "get_version",
 ]
 
 VERSION = "0.0.1-dev"
