@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import click
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -59,12 +57,15 @@ def generate_pie_chart(file_path: str, sheet_name: str, output_figure: str):
 
     # Convert the data to long format for each plant
     data_long = pd.melt(
-        data_transposed, id_vars=["Plant"], var_name="Ion", value_name="Intensity"
+        data_transposed,
+        id_vars=["Plant"],
+        var_name="Ion",
+        value_name="Intensity",
     )
 
     # Extract genus from plant names
     data_long["Genus"] = data_long["Plant"].apply(
-        lambda x: x.split()[0] if isinstance(x, str) else "Unknown"
+        lambda x: x.split()[0] if isinstance(x, str) else "Unknown",
     )
 
     # Remove rows with zero intensity
