@@ -104,7 +104,8 @@ def generate_pie_chart(file_path: str, sheet_name: str, output_figure: str):
         pctdistance=0.85,  # Distance of percentage labels from center
         labeldistance=1.05,  # Distance of labels from center
         textprops={"fontsize": 10},  # Label font size
-        wedgeprops={"edgecolor": "black"},  # Adds borders to the slices for clarity
+        # Adds borders to the slices for clarity
+        wedgeprops={"edgecolor": "black"},
     )
     plt.title("Ion distribution by plant genus (based on intensity)")
 
