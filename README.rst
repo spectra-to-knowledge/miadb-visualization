@@ -66,8 +66,8 @@ Then, you should be able to run the different notebooks:
 .. code-block:: sh
 
     uv run python3 notebooks/generate_pie_chart.py
-    uv run python3 notebooks/generate_pie_chart.py --file-path src/miadbviz/data/ajmalicine-spirooxindoles-corynantheane-spirooxindoles-combined-repartition.xlsx --sheet-name ajmalicine-spiro-corynanthean-s
-    uv run python3 notebooks/generate_pie_chart.py --file-path src/miadbviz/data/corynanthean-spirooxindoles-best-queries-repartition.xlsx --sheet-name corynanthean-spiro-best-queries
+    uv run python3 notebooks/generate_pie_chart.py --file-path miadbviz/data/ajmalicine-spirooxindoles-corynantheane-spirooxindoles-combined-repartition.xlsx --sheet-name ajmalicine-spiro-corynanthean-s
+    uv run python3 notebooks/generate_pie_chart.py --file-path miadbviz/data/corynanthean-spirooxindoles-best-queries-repartition.xlsx --sheet-name corynanthean-spiro-best-queries
 
 
 In case you need help:
