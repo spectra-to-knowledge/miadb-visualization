@@ -6,8 +6,8 @@ import pandas as pd
 
 from matplotlib import pyplot as plt
 from rdkit import DataStructs
-from rdkit.Chem import AllChem
 from rdkit.Chem import MolFromSmiles
+from rdkit.Chem.rdFingerprintGenerator import GetMorganGenerator
 from scipy.cluster.hierarchy import dendrogram
 from scipy.cluster.hierarchy import linkage
 
@@ -16,8 +16,9 @@ def tanimoto_calc(inc1: str, inc2: str) -> float:
     """Calculate the Tanimoto score between two SMILES strings."""
     mol1 = MolFromSmiles(inc1)
     mol2 = MolFromSmiles(inc2)
-    fp1 = AllChem.GetMorganFingerprintAsBitVect(mol1, 2, nBits=2048)
-    fp2 = AllChem.GetMorganFingerprintAsBitVect(mol2, 2, nBits=2048)
+    fpgen = GetMorganGenerator(radius=2, fpSize=2048)
+    fp1 = fpgen.GetFingerprint(mol1)
+    fp2 = fpgen.GetFingerprint(mol2)
     score = round(DataStructs.TanimotoSimilarity(fp1, fp2), 3)
     return score
 
