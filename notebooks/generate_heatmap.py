@@ -17,7 +17,7 @@ from ms2deepscore.models import load_model
 from spec2vec import Spec2Vec
 
 
-def get_similarity_measure(measure_type: str, model_path: str = None) -> object:
+def get_similarity_measure(measure_type: str, model_path: str | None = None) -> object:
     """Return the appropriate similarity measure based on the user's choice."""
     if measure_type == "modified_cosine":
         return ModifiedCosine()
