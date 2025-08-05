@@ -63,17 +63,12 @@ mia-visualization = "mia-visualization.cli:main"
 
 [dependency-groups]
 dev = [
-    "deptry>=0.23.0",
     "mkdocs>=1.4.2",
     "mkdocs-material>=9.6.15",
     "mkdocstrings[python]>=0.30.0",
-    "mypy>=1.17.0",
     "pre-commit>=2.20.0",
     "pytest>=8.4.1",
     "pytest-cov>=6.2.1",
-    "ruff>=0.12.4",
-    "tox-uv>=1.26.2",
-    "types-requests>=2.32.4.20250611",
 ]
 
 [tool.coverage.report]
@@ -82,10 +77,6 @@ skip_empty = true
 [tool.coverage.run]
 branch = true
 source = ["miadbviz"]
-
-[tool.mypy]
-files = ["miadbviz"]
-ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 pythonpath = [
@@ -100,3 +91,6 @@ fix = true
 
 [tool.ruff.format]
 preview = true
+
+[tool.ty.rules]
+unresolved-import = "ignore"
