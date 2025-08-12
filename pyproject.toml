@@ -78,6 +78,10 @@ skip_empty = true
 branch = true
 source = ["miadbviz"]
 
+[tool.deptry]
+[tool.deptry.per_rule_ignores]
+DEP002 = ["openpyxl",]
+
 [tool.pytest.ini_options]
 pythonpath = [
   "miadbviz"
