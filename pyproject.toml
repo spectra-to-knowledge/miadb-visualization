@@ -32,18 +32,18 @@ license = {text = "LICENSE"}
 readme = "README.rst"
 
 dependencies = [
-    "click<9.0.0,>=8.2.1",
-    "gensim<5.0.0,>=4.3.2",
-    "matchms<1.0.0,>=0.27.0", # blocked because of gensim
-    "matplotlib<4.0.0,>=3.7.2",
-    "ms2deepscore<3.0.0,>=2.5.0", # blocked because of gensim
-    "numpy<2.0.0,>=1.26.4",
-    "openpyxl<4.0.0,>=3.1.5",
-    "pandas<3.0.0,>=2.2.3",
-    "rdkit<2025.0.0,>=2024.9.4", # blocked because of matchms
+    "click>=8.2.1,<9.0.0",
+    "gensim>=4.3.2,<5.0.0",
+    "matchms>=0.27.0,<1.0.0", # blocked because of gensim
+    "matplotlib>=3.7.2,<4.0.0",
+    "ms2deepscore>=2.5.0,<3.0.0", # blocked because of gensim
+    "numpy>=1.26.4,<2.0.0",
+    "openpyxl>=3.1.5,<4.0.0",
+    "pandas>=2.2.3,<3.0.0",
+    "rdkit>=2024.9.4,<2025.0.0", # blocked because of matchms
     "scipy==1.11.0", # blocked because of gensim
-    "seaborn<1.0.0,>=0.13.2",
-    "spec2vec<1.0.0,>=0.8.0",
+    "seaborn>=0.13.2,<1.0.0",
+    "spec2vec>=0.8.0,<1.0.0",
 ]
 
 [options.entry_points]
