@@ -1,7 +1,2 @@
 [files]
-extend-exclude = [
-    "cache/",
-    "data/",
-    "scratch/",
-    "miadbviz/data/"
-]
+extend-exclude = ["cache/", "data/", "scratch/", "miadbviz/data/"]
