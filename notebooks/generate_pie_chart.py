@@ -73,7 +73,8 @@ def generate_pie_chart(file_path: str, sheet_name: str, output_figure: str):
 
     # Group by genus and calculate total intensity and count of ions
     grouped_data = (
-        data_long.groupby("Genus")
+        data_long
+        .groupby("Genus")
         .agg(total_intensity=("Intensity", "sum"), total_count=("Intensity", "count"))
         .reset_index()
     )
