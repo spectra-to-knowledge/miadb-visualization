@@ -4,10 +4,10 @@ build-backend = "pdm.backend"
 
 [project]
 name = "miadbviz"
-version = "0.0.1"
-description = "Short Description TODO"
+version = "0.1.0"
+description = "Visualization utilities for the MIADB"
 readme = "README.rst"
-requires-python = "<3.12.0,>=3.11.0"
+requires-python = "==3.13.*"
 license = { text = "LICENSE" }
 authors = [
   { name = "Sarah Szwarc", email = "sarah.szwarc@universite-paris-saclay.fr" },
@@ -31,18 +31,18 @@ classifiers = [
   "Programming Language :: Python :: 3.11",
 ]
 dependencies = [
-  "click>=8.3.0,<9.0.0",
-  "gensim>=4.3.2,<5.0.0",
-  "matchms>=0.27.0,<1.0.0",  # blocked because of gensim
-  "matplotlib>=3.7.2,<4.0.0",
-  "ms2deepscore>=2.5.0,<3.0.0",  # blocked because of gensim
-  "numpy>=1.26.4,<2.0.0",
-  "openpyxl>=3.1.5,<4.0.0",
-  "pandas>=2.2.3,<3.0.0",
-  "rdkit>=2024.9.4,<2025.0.0",  # blocked because of matchms
-  "scipy==1.11.0",  # blocked because of gensim
-  "seaborn>=0.13.2,<1.0.0",
-  "spec2vec>=0.8.0,<1.0.0",
+  "click>=8.3.1",
+  "gensim>=4.4.0",
+  "matchms>=0.31.0",
+  "matplotlib>=3.10.8",
+  "ms2deepscore>=2.6.0",
+  "numpy>=2.2.6",
+  "openpyxl>=3.1.5",
+  "pandas>=2.3.3",
+  "rdkit>=2024.9.6",  # blocked because of matchms
+  "scipy>=1.17.0",
+  "seaborn>=0.13.2",
+  "spec2vec>=0.9.1",
 ]
 
 [options.entry_points]
@@ -61,11 +61,11 @@ mia-visualization = "mia-visualization.cli:main"
 
 [dependency-groups]
 dev = [
-  "mkdocs>=1.4.2",
-  "mkdocs-material>=9.6.15",
-  "mkdocstrings[python]>=0.30.0",
-  "pre-commit>=2.20.0",
-  "pytest>=9.0.1",
+  "mkdocs>=1.6.1",
+  "mkdocs-material>=9.7.1",
+  "mkdocstrings[python]>=1.0.1",
+  "pre-commit>=4.5.1",
+  "pytest>=9.0.2",
   "pytest-cov>=7.0.0",
 ]
 
