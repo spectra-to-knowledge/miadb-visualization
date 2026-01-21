@@ -7,7 +7,7 @@ name = "miadbviz"
 version = "0.1.0"
 description = "Visualization utilities for the MIADB"
 readme = "README.rst"
-requires-python = "==3.13.*"
+requires-python = "==3.13.*"  # blocked because of matchms
 license = { text = "LICENSE" }
 authors = [
   { name = "Sarah Szwarc", email = "sarah.szwarc@universite-paris-saclay.fr" },
