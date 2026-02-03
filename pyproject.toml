@@ -1,7 +1,3 @@
-[build-system]
-requires = ["pdm-backend"]
-build-backend = "pdm.backend"
-
 [project]
 name = "miadbviz"
 version = "0.1.0"
@@ -45,12 +41,6 @@ dependencies = [
   "spec2vec>=0.9.1",
 ]
 
-[options.entry_points]
-console_scripts = "mia-visualization = mia-visualization.cli:main"
-
-[options.package_data]
-miadbviz = "data/.*"
-
 [project.urls]
 documentation = "https://github.com/spectra-to-knowledge/miadb-visualization"
 homepage = "https://github.com/spectra-to-knowledge/miadb-visualization"
@@ -69,6 +59,10 @@ dev = [
   "pytest-cov>=7.0.0",
 ]
 
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
 [tool.coverage.report]
 skip_empty = true
 
@@ -81,10 +75,6 @@ source = ["miadbviz"]
 DEP002 = [
   "openpyxl",
 ]
-
-[tool.pytest.ini_options]
-pythonpath = ["miadbviz"]
-testpaths = ["tests"]
 
 [tool.ruff]
 fix = true
