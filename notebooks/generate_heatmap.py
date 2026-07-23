@@ -10,25 +10,25 @@ import seaborn as sns
 
 from matchms import calculate_scores
 from matchms.importing import load_from_mgf
-from matchms.similarity import ModifiedCosine
+from matchms.similarity import ModifiedCosineHungarian
 from matplotlib import pyplot as plt
-from ms2deepscore import MS2DeepScore
-from ms2deepscore.models import load_model
-from spec2vec import Spec2Vec
 
 
 def get_similarity_measure(measure_type: str, model_path: str | None = None) -> object:
     """Return the appropriate similarity measure based on the user's choice."""
     if measure_type == "modified_cosine":
-        return ModifiedCosine()
+        return ModifiedCosineHungarian()
     elif measure_type == "ms2deepscore":
         if not model_path:
             raise ValueError("Model path is required for MS2DeepScore")
+        from ms2deepscore import MS2DeepScore
+        from ms2deepscore.models import load_model
         model = load_model(model_path)
         return MS2DeepScore(model)
     elif measure_type == "spec2vec":
         if not model_path:
             raise ValueError("Model path is required for Spec2Vec")
+        from spec2vec import Spec2Vec
         model = gensim.models.Word2Vec.load(model_path)
         return Spec2Vec(
             model=model,
@@ -72,7 +72,7 @@ def get_similarity_measure(measure_type: str, model_path: str | None = None) -> 
     type=float,
     default=0.005,
     show_default=True,
-    help="Tolerance for the ModifiedCosine similarity measure.",
+    help="Tolerance for the ModifiedCosineHungarian similarity measure.",
 )
 @click.option(
     "--min-score-threshold",
@@ -132,9 +132,9 @@ def generate_heatmap(
     spectra = spectra[:m]
     scores_array = scores_array[:m, :m]
 
-    # If the similarity measure is ModifiedCosine, extract the score field
+    # If the similarity measure is ModifiedCosineHungarian, extract the score field
     if measure_type == "modified_cosine":
-        scores_array = scores_array["ModifiedCosine_score"]
+        scores_array = scores_array["ModifiedCosineHungarian_score"]
 
     # Apply minimum score threshold filter
     filtered_scores_array = np.where(

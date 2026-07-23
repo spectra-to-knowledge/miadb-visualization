@@ -3,7 +3,7 @@ name = "miadbviz"
 version = "0.1.0"
 description = "Visualization utilities for the MIADB"
 readme = "README.rst"
-requires-python = "==3.13.*"  # blocked because of matchms
+requires-python = "==3.13.*"
 license = { text = "LICENSE" }
 authors = [
   { name = "Sarah Szwarc", email = "sarah.szwarc@universite-paris-saclay.fr" },
@@ -27,16 +27,16 @@ classifiers = [
   "Programming Language :: Python :: 3.11",
 ]
 dependencies = [
-  "click>=8.3.1",
+  "click>=8.4.2",
   "gensim>=4.4.0",
-  "matchms>=0.31.0",
-  "matplotlib>=3.10.8",
-  "ms2deepscore>=2.7.1",
-  "numpy>=2.2.6",
+  "matchms>=0.33.1",
+  "matplotlib>=3.11.1",
+  "ms2deepscore>=2.9.0",
+  "numpy>=2.4.6",
   "openpyxl>=3.1.5",
   "pandas>=2.3.3",
-  "rdkit>=2024.9.6",  # blocked because of matchms
-  "scipy>=1.17.0",
+  "rdkit>=2025.9.3",
+  "scipy>=1.16.3",
   "seaborn>=0.13.2",
   "spec2vec>=0.9.1",
 ]
@@ -52,11 +52,11 @@ mia-visualization = "mia-visualization.cli:main"
 [dependency-groups]
 dev = [
   "mkdocs>=1.6.1",
-  "mkdocs-material>=9.7.1",
-  "mkdocstrings[python]>=1.0.3",
-  "prek>=0.3.3",
-  "pytest>=9.0.2",
-  "pytest-cov>=7.0.0",
+  "mkdocs-material>=9.7.7",
+  "mkdocstrings[python]>=1.0.6",
+  "prek>=0.4.10",
+  "pytest>=9.1.1",
+  "pytest-cov>=7.1.0",
 ]
 
 [build-system]
