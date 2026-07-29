@@ -7,10 +7,7 @@ from __future__ import annotations
 
 import logging
 import os
-
-from subprocess import CalledProcessError
-from subprocess import check_output
-
+from subprocess import CalledProcessError, check_output
 
 __all__ = [
     "VERSION",

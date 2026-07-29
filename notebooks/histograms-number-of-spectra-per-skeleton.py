@@ -2,9 +2,7 @@ from collections import Counter
 
 import matplotlib.pyplot as plt
 import numpy as np
-
 from matchms.importing import load_from_mgf
-
 
 # Define the path to the MGF file containing annotated spectra
 # Replace "path_to_file.mgf" with the actual file path

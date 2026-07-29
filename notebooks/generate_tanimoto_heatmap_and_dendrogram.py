@@ -3,13 +3,11 @@ from __future__ import annotations
 import click
 import numpy as np
 import pandas as pd
-
 from matplotlib import pyplot as plt
 from rdkit import DataStructs
 from rdkit.Chem import MolFromSmiles
 from rdkit.Chem.rdFingerprintGenerator import GetMorganGenerator
-from scipy.cluster.hierarchy import dendrogram
-from scipy.cluster.hierarchy import linkage
+from scipy.cluster.hierarchy import dendrogram, linkage
 
 
 def tanimoto_calc(inc1: str, inc2: str) -> float:

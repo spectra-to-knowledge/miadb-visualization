@@ -7,7 +7,6 @@ import gensim
 import numpy as np
 import pandas as pd
 import seaborn as sns
-
 from matchms import calculate_scores
 from matchms.importing import load_from_mgf
 from matchms.similarity import ModifiedCosineHungarian
@@ -23,12 +22,14 @@ def get_similarity_measure(measure_type: str, model_path: str | None = None) -> 
             raise ValueError("Model path is required for MS2DeepScore")
         from ms2deepscore import MS2DeepScore
         from ms2deepscore.models import load_model
+
         model = load_model(model_path)
         return MS2DeepScore(model)
     elif measure_type == "spec2vec":
         if not model_path:
             raise ValueError("Model path is required for Spec2Vec")
         from spec2vec import Spec2Vec
+
         model = gensim.models.Word2Vec.load(model_path)
         return Spec2Vec(
             model=model,

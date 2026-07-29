@@ -19,7 +19,6 @@ import logging
 
 import click
 
-
 __all__ = [
     "main",
 ]
